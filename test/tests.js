@@ -27,7 +27,7 @@ var notificationsMock = {
 module('initialization');
 
 test('initialization test', function(){
-    var notifier = new Notifier(notificationsMock);
+    var notifier = new notifyjs.Notifier(notificationsMock);
     equal(notifier.check(), false, 'has no initial permission');
 });
 

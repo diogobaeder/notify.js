@@ -1,9 +1,19 @@
-var Notifier = function(notifications){
+var notifyjs = notifyjs || {};
+
+(function(n){
+
+
+
+notifyjs.Notifier = function(notifications){
     this._notifications = notifications;
 };
 
-Notifier.prototype = {
+notifyjs.Notifier.prototype = {
     check: function(){
         return false;
     }
 };
+
+
+
+})(notifyjs);
