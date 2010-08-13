@@ -6,7 +6,7 @@ var notifyjs = notifyjs || {};
 
 notifyjs.Notifier = function(notifications){
     this._notifications = notifications;
-    pushToArray(this);
+    Arrays.push(this);
 };
 
 notifyjs.Notifier.prototype = {
@@ -21,12 +21,30 @@ notifyjs.Notifier.prototype = {
     
     create: function(icon, title, body){
         var notification = this._notifications.createNotification(icon, title, body);
-        pushToArray(this, notification);
+        Arrays.push(this, notification);
+        return notification;
+    },
+    
+    shift: function(){
+        var notification = Arrays.shift(this);
+        notification.cancel();
         return notification;
     }
 };
 
 // Auxiliary functions
+var Arrays = {
+    push: function(context) {
+        var objects = Array.prototype.slice.call(arguments, 1);
+        Array.prototype.push.apply(context, objects);
+    },
+    pop: function(context){
+        return Array.prototype.pop.apply(context);
+    },
+    shift: function(context){
+        return Array.prototype.shift.apply(context);
+    }
+};
 function pushToArray(container) {
     var objects = Array.prototype.slice.call(arguments, 1);
     Array.prototype.push.apply(container, objects);
