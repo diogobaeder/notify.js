@@ -35,6 +35,12 @@ notifyjs.Notifier.prototype = {
         var notification = Arrays.pop(this);
         notification.cancel();
         return notification;
+    },
+    
+    flush: function(){
+        for (var i = -1, len = this.length; ++i < len;) {
+            this.pop();
+        }
     }
 };
 
