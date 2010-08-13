@@ -14,22 +14,26 @@ function getNotificationsMock(){
                 if (callback) callback();
             },
             createNotification: function(){
-                
+                return getNotificationInstanceMock();
             }
-        },
-        notificationInstanceMock = {
-            show: function(){
-            },
-            cancel: function(){
-                
-            }
-        };
+        }
     return notificationsMock;
+}
+
+function getNotificationInstanceMock(){
+    var notificationInstanceMock = {
+        show: function(){
+        },
+        cancel: function(){
+            
+        }
+    };
+    return notificationInstanceMock;
 }
 
 module('initialization');
 
-test('initialization test', function(){
+test('should grant permission upon verification', function(){
     var notifier = new notifyjs.Notifier(getNotificationsMock());
     
     expect(3);
@@ -41,12 +45,13 @@ test('initialization test', function(){
 
 module('message creation');
 
-test('creating a simple message', function(){
+test('should create a simple message', function(){
     var notifier = new notifyjs.Notifier(getNotificationsMock());
     
     equal(notifier.length, 0, 'notifier should start with 0 notifications in the stack');
     notifier.create('foo.jpg', 'bar', 'baz');
     equal(notifier.length, 1, 'notifier should have one notification in the stack');
+    equal(typeof notifier[0], 'object', 'first notification in the stack should be an object');
 });
 
 
