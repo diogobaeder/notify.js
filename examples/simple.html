@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>notify.js simple example</title>
+    <style type="text/css">
+    command {
+        color: blue;
+        cursor: pointer;
+    }
+    command {
+        text-decoration: underline;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>notify.js simple example</h1>
+    </header>
+    <p>As the native notification API requires you to interact with the
+    page so that the permission to create notifications can be requested,
+    <command id="request-permission">click here</command> to request it.</p>
+    <p>Please also remember to use any kind of server to test this, since
+    the example won't work if opened as a local file.</p>
+    <p>After you've given the permission for the browser to access the API,
+    <command id="show-message">click here</command> to show a message.</p>
+    <script src="../src/notify.js"></script>
+    <script>
+    var notifier = new notifyjs.Notifier(),
+        requestPermission = document.getElementById('request-permission'),
+        showMessage = document.getElementById('show-message');
+    requestPermission.addEventListener('click', function(event){
+        notifier.check();
+    });
+    showMessage.addEventListener('click', function(event){
+        notifier.create('python.png', 'Time now is', new Date());
+    });
+    </script>
+</body>
+</html>
