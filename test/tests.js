@@ -74,6 +74,10 @@ test('should remove the messages from specified positions', function(){
     var first = notifier.shift();
     equal(typeof first, 'object', 'detached notification should be an object');
     equal(notifier.length, 2, 'notifier should now have 2 notifications');
+    
+    var last = notifier.pop();
+    equal(typeof last, 'object', 'detached notification should be an object');
+    equal(notifier.length, 1, 'notifier should now have 1 notifications');
 });
 
 

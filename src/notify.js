@@ -29,6 +29,12 @@ notifyjs.Notifier.prototype = {
         var notification = Arrays.shift(this);
         notification.cancel();
         return notification;
+    },
+    
+    pop: function(){
+        var notification = Arrays.pop(this);
+        notification.cancel();
+        return notification;
     }
 };
 
