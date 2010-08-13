@@ -6,6 +6,7 @@ var notifyjs = notifyjs || {};
 
 notifyjs.Notifier = function(notifications){
     this._notifications = notifications;
+    pushToArray(this);
 };
 
 notifyjs.Notifier.prototype = {
@@ -20,10 +21,16 @@ notifyjs.Notifier.prototype = {
     
     create: function(icon, title, body){
         var notification = this._notifications.createNotification(icon, title, body);
-        Array.prototype.push.call(this, notification);
+        pushToArray(this, notification);
         return notification;
     }
 };
+
+// Auxiliary functions
+function pushToArray(container) {
+    var objects = Array.prototype.slice.call(arguments, 1);
+    Array.prototype.push.apply(container, objects);
+}
 
 
 

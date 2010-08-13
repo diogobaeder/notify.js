@@ -44,6 +44,7 @@ module('message creation');
 test('creating a simple message', function(){
     var notifier = new notifyjs.Notifier(getNotificationsMock());
     
+    equal(notifier.length, 0, 'notifier should start with 0 notifications in the stack');
     notifier.create('foo.jpg', 'bar', 'baz');
     equal(notifier.length, 1, 'notifier should have one notification in the stack');
 });
