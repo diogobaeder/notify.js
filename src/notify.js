@@ -1,11 +1,11 @@
 var notifyjs = notifyjs || {};
 
-(function(n){
+(function(n, win){
 
 
 
-notifyjs.Notifier = function(notifications){
-    this._notifications = notifications;
+notifyjs.Notifier = function(notificationsAPI){
+    this._notifications = notificationsAPI || win.webkitNotifications || win.notifications;
     Arrays.push(this);
 };
 
@@ -57,11 +57,7 @@ var Arrays = {
         return Array.prototype.shift.apply(context);
     }
 };
-function pushToArray(container) {
-    var objects = Array.prototype.slice.call(arguments, 1);
-    Array.prototype.push.apply(container, objects);
-}
 
 
 
-})(notifyjs);
+})(notifyjs, window);
