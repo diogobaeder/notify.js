@@ -33,6 +33,7 @@ test('initialization test', function(){
     var notifier = new notifyjs.Notifier(getNotificationsMock());
     equal(notifier.check(), false, 'has no initial permission, but must automatically ask it to the user');
     ok(notifier.check(), 'second time the permission should have been set up');
+    ok(notifier.check(), 'third time the permission is still granted');
 });
 
 
