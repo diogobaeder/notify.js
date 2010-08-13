@@ -16,6 +16,12 @@ notifyjs.Notifier.prototype = {
             return false;
         }
         return true;
+    },
+    
+    create: function(icon, title, body){
+        var notification = this._notifications.createNotification(icon, title, body);
+        Array.prototype.push.call(this, notification);
+        return notification;
     }
 };
 
