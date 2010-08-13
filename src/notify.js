@@ -20,7 +20,17 @@ notifyjs.Notifier.prototype = {
     },
     
     create: function(icon, title, body){
-        var notification = this._notifications.createNotification(icon, title, body);
+        var notification, url;
+        
+        if (arguments.length === 1) {
+            url = icon;
+            notification = this._notifications.createHTMLNotification(url);
+            notification.type = 'html';
+        } else {
+            notification = this._notifications.createNotification(icon, title, body);
+            notification.type = 'simple';
+        }
+        
         this._setupNotificationEvents(notification);
         notification.show();
         Arrays.push(this, notification);

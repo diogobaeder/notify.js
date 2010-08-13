@@ -34,6 +34,8 @@ test('should create a simple message', function(){
     ok(notifier[1].visible, 'second notification should be visible');
 });
 
+
+
 module('message removing');
 
 test('should remove the messages from specified positions', function(){
@@ -60,6 +62,8 @@ test('should remove the messages from specified positions', function(){
 test('should flush the entire stack', function(){
     var notifier = new notifyjs.Notifier(getNotificationsMock());
     
+    expect(2);
+    
     notifier.create('foo.jpg', 'bar', 'baz');
     notifier.create('foo.jpg', 'bar', 'baz');
     notifier.create('foo.jpg', 'bar', 'baz');
@@ -67,6 +71,20 @@ test('should flush the entire stack', function(){
     
     notifier.flush();
     equal(notifier.length, 0, 'notifier should have no elements after flushing');
+});
+
+
+
+module('different notification types');
+
+test('should show an HTML notification', function(){
+    var notifier = new notifyjs.Notifier(getNotificationsMock());
+    
+    notifier.create('foo.jpg', 'bar', 'baz');
+    equal(notifier[0].type, 'simple', 'notification should be simple type');
+    
+    notifier.create('foo');
+    equal(notifier[1].type, 'html', 'notification should be HTML type');
 });
 
 

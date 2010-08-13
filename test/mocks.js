@@ -11,6 +11,9 @@ function getNotificationsMock(){
             },
             createNotification: function(){
                 return getNotificationInstanceMock();
+            },
+            createHTMLNotification: function(){
+                return getNotificationInstanceMock();
             }
         }
     return notificationsMock;
