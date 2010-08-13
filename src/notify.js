@@ -21,8 +21,19 @@ notifyjs.Notifier.prototype = {
     
     create: function(icon, title, body){
         var notification = this._notifications.createNotification(icon, title, body);
+        this._setupNotificationEvents(notification);
+        notification.show();
         Arrays.push(this, notification);
         return notification;
+    },
+    
+    _setupNotificationEvents: function(notification){
+        Events.add(notification, 'display', function(event){
+            notification.visible = true;
+        });
+        Events.add(notification, 'close', function(event){
+            notification.visible = false;
+        });
     },
     
     shift: function(){
@@ -56,6 +67,15 @@ var Arrays = {
     shift: function(context){
         return Array.prototype.shift.apply(context);
     }
+},
+Events = {
+    add: (function(doc){
+        return doc.addEventListener ? function(element, name, listener) {
+                element.addEventListener(name, listener);
+            } : function(element, name, listener) {
+                element.attachEvent('on' + name, listener);
+            };
+    })(document)
 };
 
 
