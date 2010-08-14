@@ -5,7 +5,7 @@
 module('initialization');
 
 test('should grant permission upon verification', function(){
-    var notifier = new notifyjs.Notifier(getNotificationsMock());
+    var notifier = new notifyjs.Notifier(null, getNotificationsMock());
     
     expect(3);
     
@@ -17,7 +17,7 @@ test('should grant permission upon verification', function(){
 module('message creation');
 
 test('should create a simple message', function(){
-    var notifier = new notifyjs.Notifier(getNotificationsMock());
+    var notifier = new notifyjs.Notifier(null, getNotificationsMock());
     
     expect(7);
     
@@ -39,7 +39,7 @@ test('should create a simple message', function(){
 module('message removing');
 
 test('should remove the messages from specified positions', function(){
-    var notifier = new notifyjs.Notifier(getNotificationsMock());
+    var notifier = new notifyjs.Notifier(null, getNotificationsMock());
     
     expect(7);
     
@@ -60,7 +60,7 @@ test('should remove the messages from specified positions', function(){
 });
 
 test('should flush the entire stack', function(){
-    var notifier = new notifyjs.Notifier(getNotificationsMock());
+    var notifier = new notifyjs.Notifier(null, getNotificationsMock());
     
     expect(2);
     
@@ -78,13 +78,26 @@ test('should flush the entire stack', function(){
 module('different notification types');
 
 test('should show an HTML notification', function(){
-    var notifier = new notifyjs.Notifier(getNotificationsMock());
+    var notifier = new notifyjs.Notifier(null, getNotificationsMock());
     
     notifier.create('foo.jpg', 'bar', 'baz');
     equal(notifier[0].type, 'simple', 'notification should be simple type');
     
     notifier.create('foo');
     equal(notifier[1].type, 'html', 'notification should be HTML type');
+});
+
+test('should show preset notifications', function(){
+    var notifier = new notifyjs.Notifier(null, getNotificationsMock());
+    
+    notifier.info('foo', 'bar');
+    equal(notifier[0].type, 'simple', 'info notification should be simple type');
+    
+    notifier.ok('foo', 'bar');
+    equal(notifier[1].type, 'simple', 'ok notification should be simple type');
+    
+    notifier.warning('foo', 'bar');
+    equal(notifier[2].type, 'simple', 'warning notification should be simple type');
 });
 
 

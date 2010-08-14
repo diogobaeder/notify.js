@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>notify.js simple example</title>
+    <style type="text/css">
+    command {
+        color: blue;
+        cursor: pointer;
+    }
+    command {
+        text-decoration: underline;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>notify.js simple example</h1>
+    </header>
+    <p>As the native notification API requires you to interact with the
+    page so that the permission to create notifications can be requested,
+    <command id="request-permission">click here</command> to request it.</p>
+    
+    <p>Please also remember to use any kind of server to test this, since
+    the example won't work if opened as a local file.</p>
+    
+    <h2>Simple notifications</h2>
+    
+    <p>After you've given the permission for the browser to access the API,
+    <command id="simple-notification">click here</command> to show a notification.</p>
+    
+    <p>Now, let's create an HTML notification:
+    <command id="html-notification">click here</command> to show it.</p>
+    
+    <h2>Preset notifications</h2>
+    
+    <p><command id="ok-notification">"ok" notification</command>,
+    <command id="info-notification">"info" notification</command>,
+    <command id="warning-notification">"warning" notification</command>, </p>
+    
+    
+    
+    <script src="../src/notify.js"></script>
+    <script>
+    var notifier = new notifyjs.Notifier({
+            icons: {
+                ok: '../src/ok.png',
+                info: '../src/info.png',
+                warning: '../src/warning.png',
+            }
+        }),
+        requestPermission = document.getElementById('request-permission'),
+        simpleNotification = document.getElementById('simple-notification'),
+        htmlNotification = document.getElementById('html-notification'),
+        okNotification = document.getElementById('ok-notification'),
+        infoNotification = document.getElementById('info-notification'),
+        warningNotification = document.getElementById('warning-notification');
+    
+    requestPermission.onclick = function(){
+        notifier.check();
+    };
+    
+    // Simple & HTML notifications
+    simpleNotification.onclick = function(){
+        notifier.create('python.png', 'Time now is', new Date());
+    };
+    htmlNotification.onclick = function(){
+        notifier.create('htmltext.html');
+    };
+    
+    // Preset notifications
+    okNotification.onclick = function(){
+        notifier.ok('ok', 'notification');
+    };
+    infoNotification.onclick = function(){
+        notifier.info('info', 'notification');
+    };
+    warningNotification.onclick = function(){
+        notifier.warning('warning', 'notification');
+    };
+    </script>
+</body>
+</html>
